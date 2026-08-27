@@ -2,7 +2,9 @@ import warnings
 
 from dotenv import load_dotenv
 import streamlit as st
-from langchain_google_genai import ChatGoogleGenerativeAI
+
+from analysis import extract_blood_values, generate_diet_plan, split_response
+from llm_client import get_llm
 
 warnings.filterwarnings(
     "ignore",
@@ -13,7 +15,7 @@ load_dotenv()
 
 st.set_page_config(page_title="Blood Work Analyzer", layout="wide")
 
-llm = ChatGoogleGenerativeAI(model="gemma-4-31b-it")
+llm = get_llm()
 
 st.markdown("""
 <style>
@@ -68,50 +70,10 @@ if analyze_clicked:
             st.warning("Please paste a blood work report before analyzing.")
     else:
         with st.spinner("Analyzing your blood work..."):
+            extracted_values = extract_blood_values(llm, blood_report)
+            full_response = generate_diet_plan(llm, extracted_values)
 
-            # Stage 1: Extract and flag abnormal values
-            extraction_prompt = f"""
-You are a medical data extraction assistant.
-
-From the blood report below, extract ALL test values and classify each one as HIGH, LOW, or NORMAL
-based on the reference ranges provided in the report.
-
-Format your response as:
-- Test Name: value | Status: HIGH/LOW/NORMAL | Reference: range
-
-Blood Report:
-{blood_report}
-"""
-            extraction_response = llm.invoke(extraction_prompt)
-            extracted_values = extraction_response.text
-
-            # Stage 2: Health summary and Indian diet plan
-            diet_prompt = f"""
-You are a clinical nutritionist specializing in Indian dietary habits.
-
-Based on the blood work analysis below, provide two clearly separated sections:
-
-SECTION 1 - HEALTH SUMMARY:
-Write 4-5 lines explaining the patient's condition in simple, non-technical language.
-
-SECTION 2 - INDIAN DIET PLAN:
-List foods to eat more of and foods to avoid, using commonly available Indian foods
-like dal, sabzi, roti, rice, etc. Keep it practical and concise.
-
-Blood Work Analysis:
-{extracted_values}
-"""
-            diet_response = llm.invoke(diet_prompt)
-            full_response = diet_response.text
-
-        # Split response into two sections
-        if "SECTION 2" in full_response:
-            parts = full_response.split("SECTION 2")
-            health_summary = parts[0].replace("SECTION 1 - HEALTH SUMMARY:", "").replace("SECTION 1", "").strip()
-            diet_plan = ("SECTION 2" + parts[1]).replace("SECTION 2 - INDIAN DIET PLAN:", "").replace("SECTION 2", "").strip()
-        else:
-            health_summary = full_response
-            diet_plan = ""
+        health_summary, diet_plan = split_response(full_response)
 
         # Render into fixed-height scrollable boxes
         health_box.markdown(
