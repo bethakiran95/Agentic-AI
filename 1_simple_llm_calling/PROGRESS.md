@@ -1,5 +1,7 @@
 # Progress Log
 
+This is a generative AI application built using LangChain and Google Gemini/Gemma chat models.
+
 ## Simple LLM Calling ([call_llm.ipynb](call_llm.ipynb))
 
 - Set up `ChatGoogleGenerativeAI` from `langchain-google-genai` and loaded credentials via `.env` (`load_dotenv`).

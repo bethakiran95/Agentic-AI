@@ -1,5 +1,7 @@
 # Progress Log
 
+This is a generative AI application built using LangChain and Google Gemini/Gemma chat models.
+
 ## 1. Health / Blood Work Analysis
 
 ### Notebook prototype ([2_health_analysis/blood_work_analysis.ipynb](../2_health_analysis/blood_work_analysis.ipynb))
