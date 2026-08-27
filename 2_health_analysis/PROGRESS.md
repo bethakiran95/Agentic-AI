@@ -1,13 +1,6 @@
 # Progress Log
 
-## 1. Simple LLM Calling ([1_simple_llm_calling/call_llm.ipynb](../1_simple_llm_calling/call_llm.ipynb))
-
-- Set up `ChatGoogleGenerativeAI` from `langchain-google-genai` and loaded credentials via `.env` (`load_dotenv`).
-- Basic single-turn invocation: `llm.invoke("How many moons does Jupiter have?")`.
-- System + human message invocation using a `[["system", ...], ["human", ...]]` message list to constrain the response style (short one-liner).
-- Compared model outputs across different models/temperatures (`gemini-3.6-flash` at `temperature=0` vs `gemini-3.5-flash` at `temperature=1`) using the same prompt to observe determinism vs creativity.
-
-## 2. Health / Blood Work Analysis
+## 1. Health / Blood Work Analysis
 
 ### Notebook prototype ([2_health_analysis/blood_work_analysis.ipynb](../2_health_analysis/blood_work_analysis.ipynb))
 
