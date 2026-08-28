@@ -115,7 +115,3 @@ This does not mean the returned documents answer the question. A real applicatio
 - Performed semantic searches and inspected IDs, documents, and distances.
 - Observed both useful semantic matches and irrelevant nearest matches.
 - Made all notebook cells rerunnable and verified that all six cells execute successfully.
-
-## Next Step
-
-The natural next step is to add metadata (for example, category or company), test filtered queries, and use a persistent ChromaDB client so records survive kernel restarts.
