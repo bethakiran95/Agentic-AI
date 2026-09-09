@@ -82,30 +82,6 @@ Guardrails can apply at multiple stages:
 
 ---
 
-## DevOps Implications
-
-### **1. Safe Logging & Monitoring**
-- **Without guardrails:** Logs contain customer emails, phone numbers, credit cards
-- **With guardrails:** Logs automatically mask PII
-- **Result:** Logs are safe to view, share, and store ✅
-
-### **2. Compliance & Audit**
-- Guardrails create audit trail of PII protection
-- Easy to demonstrate compliance to auditors
-- Reduces legal liability and fines
-
-### **3. Production Deployment**
-- Guardrails work automatically at runtime
-- No manual data sanitization needed
-- Works even if app crashes (logs stay safe)
-
-### **4. Incident Response**
-- Data breach? Guardrails limit exposure (PII was already masked)
-- Easier to recover and notify customers
-- Reduces damage from security incidents
-
----
-
 ## When to Use Guardrails
 
 | Scenario | Use Guardrails? | Why? |
@@ -175,27 +151,4 @@ Guardrails can apply at multiple stages:
 
 **Rule:** If your app handles customer/user data → Always use guardrails
 
----
 
-## Interview Talking Points
-
-1. **"Guardrails automatically detect and mask sensitive data"**
-   - No manual data sanitization needed
-   - Works at multiple protection points
-
-2. **"They're critical for legal compliance"**
-   - GDPR, HIPAA, PCI-DSS have steep fines
-   - Guardrails help demonstrate compliance to auditors
-
-3. **"They reduce security risk and incident impact"**
-   - Even if app is breached, PII was already masked
-   - Limits damage from data leaks
-
-4. **"They enable safe logging and monitoring"**
-   - Logs can be shared with team without exposing PII
-   - Supports DevOps operations in regulated environments
-
-5. **"They work automatically at runtime"**
-   - Not a manual process
-   - Works even if app crashes
-   - No performance overhead
