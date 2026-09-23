@@ -16,8 +16,8 @@ from reviews_api import get_product_rating
 
 load_dotenv()
 
-DB_PATH = os.path.join(os.path.dirname(__file__), "store.db")
-PREFERENCE_NAMES = {"organic_only", "max_price", "minimum_rating"}
+DB_PATH = os.path.join(os.path.dirname(__file__), "store.db") # Path to the SQLite database file : 10_project_shopping_agent/store.db
+PREFERENCE_NAMES = {"organic_only", "max_price", "minimum_rating"} # 
 
 llm = ChatGroq(model="qwen/qwen3.8-27b", temperature=0)
 vision_llm = ChatGoogleGenerativeAI(model="gemini-3.6-flash")
@@ -171,7 +171,7 @@ def describe_product_image(image_path: str) -> str:
     )
 
 
-@tool
+@tool # allows user to ask What have I ordered before?
 def get_order_history() -> str:
     """Return a summary of products previously ordered by the user."""
     conn = sqlite3.connect(DB_PATH)
